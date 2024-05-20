@@ -1,4 +1,4 @@
-const images = [
+let images = [
 	{ id: 1, url: 'images/1.jpg', answer: 'real' },
 	{ id: 2, url: 'images/2.jpg', answer: 'real' },
 	{ id: 3, url: 'images/3.jpg', answer: 'real' },
@@ -17,12 +17,17 @@ const images = [
 
 let currentIndex = 0;
 let responses = [];
-let countdownTimer;
 let userInfo = {};
+let quizTimer;
+const totalQuizTime = images.length * 60; // Total time in seconds
 
 document.getElementById('user-form').addEventListener('submit', function (event) {
 	event.preventDefault();
-	userInfo.name = document.getElementById('name').value;
+
+	const [firstName, lastName] = document.getElementById('name').value.split(' ');
+	userInfo.name =
+		firstName.charAt(0).toUpperCase() + firstName.slice(1) + ' ' + lastName.charAt(0).toUpperCase() + lastName.slice(1);
+
 	userInfo.age = document.getElementById('age').value;
 	userInfo.gender = document.getElementById('gender').value;
 	startQuiz();
@@ -32,32 +37,38 @@ function startQuiz() {
 	document.getElementById('user-form-container').style.display = 'none';
 	document.getElementById('quiz-container').style.display = 'block';
 	loadImage();
+	startQuizTimer();
 }
 
 function loadImage() {
 	const imageElement = document.getElementById('quiz-image');
 	imageElement.src = images[currentIndex].url;
-	startCountdown();
 }
 
-function startCountdown() {
-	let countdown = 5;
+function startQuizTimer() {
+	let remainingTime = totalQuizTime;
 	const countdownElement = document.getElementById('countdown');
-	countdownElement.textContent = countdown;
-	clearInterval(countdownTimer);
-	countdownTimer = setInterval(() => {
-		countdown--;
-		countdownElement.textContent = countdown;
-		if (countdown <= 0) {
-			clearInterval(countdownTimer);
-			alert('Out of time! Do you want to start again?');
-			restartQuiz();
+	countdownElement.textContent = formatTime(remainingTime);
+
+	quizTimer = setInterval(() => {
+		remainingTime--;
+		countdownElement.textContent = formatTime(remainingTime);
+
+		if (remainingTime <= 0) {
+			clearInterval(quizTimer);
+			alert('Time is up!');
+			displayResults();
 		}
 	}, 1000);
 }
 
+function formatTime(seconds) {
+	const minutes = Math.floor(seconds / 60);
+	const secs = seconds % 60;
+	return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
 function submitAnswer(selectedOption) {
-	clearInterval(countdownTimer);
 	const response = {
 		question: {
 			id: images[currentIndex].id,
@@ -71,6 +82,7 @@ function submitAnswer(selectedOption) {
 		currentIndex++;
 		loadImage();
 	} else {
+		clearInterval(quizTimer);
 		displayResults();
 	}
 }
@@ -81,12 +93,21 @@ function displayResults() {
 	resultsContainer.style.display = 'block';
 
 	const userInfoElement = document.getElementById('user-info');
-	userInfoElement.textContent = `Name: ${userInfo.name}, Age: ${userInfo.age}, Gender: ${userInfo.gender}`;
+	userInfoElement.textContent = `${userInfo.name}, ${userInfo.age}, ${userInfo.gender}`;
 
 	const resultsTableBody = document.getElementById('results-table').getElementsByTagName('tbody')[0];
 	resultsTableBody.innerHTML = '';
 	let correctCount = 0;
-	responses.forEach((response) => {
+
+	for (const element of images) {
+		const response = responses.find((r) => r.question.id === element.id) || {
+			question: {
+				id: element.id,
+				selected: 'No Answer',
+				answer: element.answer,
+			},
+		};
+
 		const row = resultsTableBody.insertRow();
 		const cell1 = row.insertCell(0);
 		const cell2 = row.insertCell(1);
@@ -94,9 +115,7 @@ function displayResults() {
 		const cell4 = row.insertCell(3);
 		const cell5 = row.insertCell(4);
 
-		cell1.innerHTML = `<img src="${
-			images[response.question.id - 1].url
-		}" alt="Image" style="width: 50px; height: auto;">`;
+		cell1.innerHTML = `<img src="${element.url}" alt="Image" style="width: 50px; height: auto;">`;
 		cell2.textContent = response.question.id;
 		cell3.textContent = response.question.selected;
 		cell4.textContent = response.question.answer;
@@ -104,7 +123,7 @@ function displayResults() {
 		cell5.textContent = match ? 'Yes' : 'No';
 		row.className = match ? 'correct' : 'wrong';
 		if (match) correctCount++;
-	});
+	}
 
 	const totalScoreElement = document.getElementById('total-score');
 	totalScoreElement.textContent = `Total Score: ${correctCount} out of ${responses.length}`;
@@ -154,18 +173,23 @@ function downloadTableAsExcel() {
 
 	const ws = XLSX.utils.aoa_to_sheet(ws_data);
 
-	// Apply styles to the cells
-	const range = XLSX.utils.decode_range(ws['!ref']);
-	for (let rowNum = range.s.r + 5; rowNum <= range.e.r - 2; rowNum++) {
-		const matchCell = ws[XLSX.utils.encode_cell({ r: rowNum, c: 3 })];
-		const isCorrect = matchCell.v === 'Yes';
-		const fillColor = isCorrect ? 'FFC8E6C9' : 'FFFFCDD2'; // Correct: light green, Wrong: light red
-		matchCell.s = {
-			fill: {
-				patternType: 'solid',
-				fgColor: { rgb: fillColor },
-			},
-		};
+	// Apply styles to the cells based on true or false
+	for (let i = 5; i < ws_data.length - 1; i++) {
+		const match = ws_data[i][3] === 'Yes';
+		const fillColor = match ? 'C8E6C9' : 'F8D7DA'; // Correct: light green, Wrong: light red
+
+		for (let j = 0; j < ws_data[i].length; j++) {
+			const cellAddress = XLSX.utils.encode_cell({ r: i, c: j });
+			if (!ws[cellAddress]) {
+				ws[cellAddress] = { t: 's', v: ws_data[i][j] };
+			}
+			ws[cellAddress].s = {
+				fill: {
+					patternType: 'solid',
+					fgColor: { rgb: fillColor },
+				},
+			};
+		}
 	}
 
 	XLSX.utils.book_append_sheet(wb, ws, 'Results');
