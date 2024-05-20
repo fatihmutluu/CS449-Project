@@ -1,0 +1,133 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.image-container {
+    height: 70vh; /* Adjust as needed to fit the screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#quiz-container img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#countdown {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+#results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#download-buttons button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+#results-table th, #results-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+#results-table th {
+    background-color: #f2f2f2;
+    font-size: 18px;
+}
+
+#results-table td {
+    font-size: 16px;
+}
+
+.correct {
+    background-color: #c8e6c9;
+}
+
+.wrong {
+    background-color: #ffcdd2;
+}
+
+#user-info {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#total-score {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}

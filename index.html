@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="user-form-container" class="container">
+        <h1>Phishing Quiz</h1>
+        <form id="user-form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <button type="submit">Start Quiz</button>
+        </form>
+    </div>
+
+    <div id="quiz-container" class="container" style="display: none;">
+        <div class="image-container">
+            <img id="quiz-image" src="" alt="Quiz Image">
+        </div>
+        <div id="options">
+            <button onclick="submitAnswer('real')">Real</button>
+            <button onclick="submitAnswer('phishing')">Phishing</button>
+        </div>
+        <div id="countdown">5</div>
+    </div>
+
+    <div id="results-container" class="container" style="display: none;">
+        <div id="results-header">
+            <h2>Quiz Results</h2>
+            <div id="download-buttons">
+                <button onclick="downloadTableAsImage()">Download as Image</button>
+                <button onclick="downloadTableAsExcel()">Download as Excel</button>
+            </div>
+        </div>
+        <p id="user-info"></p>
+        <table id="results-table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Image ID</th>
+                    <th>Given Answer</th>
+                    <th>Correct Answer</th>
+                    <th>Match</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <p id="total-score"></p>
+        <button onclick="restartQuiz()">Restart Quiz</button>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</body>
+</html>
