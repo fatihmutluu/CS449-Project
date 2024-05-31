@@ -30,6 +30,7 @@ document.getElementById('user-form').addEventListener('submit', function (event)
 
 	userInfo.age = document.getElementById('age').value;
 	userInfo.gender = document.getElementById('gender').value;
+	userInfo.department = document.getElementById('department').value;
 	startQuiz();
 });
 
@@ -37,35 +38,11 @@ function startQuiz() {
 	document.getElementById('user-form-container').style.display = 'none';
 	document.getElementById('quiz-container').style.display = 'block';
 	loadImage();
-	startQuizTimer();
 }
 
 function loadImage() {
 	const imageElement = document.getElementById('quiz-image');
 	imageElement.src = images[currentIndex].url;
-}
-
-function startQuizTimer() {
-	let remainingTime = totalQuizTime;
-	const countdownElement = document.getElementById('countdown');
-	countdownElement.textContent = formatTime(remainingTime);
-
-	quizTimer = setInterval(() => {
-		remainingTime--;
-		countdownElement.textContent = formatTime(remainingTime);
-
-		if (remainingTime <= 0) {
-			clearInterval(quizTimer);
-			alert('Time is up!');
-			displayResults();
-		}
-	}, 1000);
-}
-
-function formatTime(seconds) {
-	const minutes = Math.floor(seconds / 60);
-	const secs = seconds % 60;
-	return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
 function submitAnswer(selectedOption) {
@@ -93,7 +70,7 @@ function displayResults() {
 	resultsContainer.style.display = 'block';
 
 	const userInfoElement = document.getElementById('user-info');
-	userInfoElement.textContent = `${userInfo.name}, ${userInfo.age}, ${userInfo.gender}`;
+	userInfoElement.textContent = `${userInfo.name}, ${userInfo.age}, ${userInfo.gender}, ${userInfo.department}`;
 
 	const resultsTableBody = document.getElementById('results-table').getElementsByTagName('tbody')[0];
 	resultsTableBody.innerHTML = '';
@@ -159,6 +136,7 @@ function downloadTableAsExcel() {
 		['Name', userInfo.name],
 		['Age', userInfo.age],
 		['Gender', userInfo.gender],
+		['Department', userInfo.department],
 		[],
 		['Image ID', 'Given Answer', 'Correct Answer', 'Match'],
 	];
