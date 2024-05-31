@@ -32,7 +32,7 @@
                     <option value="NOT">Other</option>
                 </select>
             </div>
-            <button type="submit">Start Quiz</button>
+            <button type="submit" id="start-quiz-button" disabled>Start Quiz</button>
         </form>
     </div>
 
@@ -40,9 +40,12 @@
         <div class="image-container">
             <img id="quiz-image" src="" alt="Quiz Image">
         </div>
-        <div id="options">
-            <button onclick="submitAnswer('real')">Real</button>
-            <button onclick="submitAnswer('phishing')">Phishing</button>
+        <div id="options" class="button-group">
+            <button class="button-definitely-human" onclick="submitAnswer('Definitely Human')">Definitely Human</button>
+            <button class="button-likely-human" onclick="submitAnswer('Likely Human')">Likely Human</button>
+            <button class="button-not-sure" onclick="submitAnswer('Not Sure')">Not Sure</button>
+            <button class="button-likely-ai" onclick="submitAnswer('Likely AI')">Likely AI</button>
+            <button class="button-definitely-ai" onclick="submitAnswer('Definitely AI')">Definitely AI</button>
         </div>
     </div>
 
@@ -59,9 +62,10 @@
             <thead>
                 <tr>
                     <th>Image</th>
-                    <th>Image ID</th>
+                    <th>Image Name</th>
                     <th>Given Answer</th>
                     <th>Correct Answer</th>
+                    <th>Points</th>
                     <th>Match</th>
                 </tr>
             </thead>
