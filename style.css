@@ -51,6 +51,7 @@ button {
     border-radius: 5px;
     width: 100%;
     color: white;
+    background-color: rgb(90, 66, 224);
 }
 
 button:disabled {
@@ -60,9 +61,8 @@ button:disabled {
 
 .button-group {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    flex-direction: row;
+    align-items: row;
 }
 
 .button-definitely-human {
@@ -79,7 +79,7 @@ button:disabled {
 }
 
 .button-likely-ai {
-    background-color: #ff6f00; /* Orange */
+    background-color: #da377a; /* Orange */
 }
 
 .button-definitely-ai {
