@@ -1,10 +1,36 @@
 let images = [
-	{ name: 'ai-no-loss1.png' },
-	{ name: 'ai-no-loss2.png' },
+	{ name: 'r-no-loss4.png' },
+	{ name: 'r-photo-reward1.png' },
+	{ name: 'ai-no-loss4.png' },
+	{ name: 'ai-photo-reward5.png' },
+	{ name: 'ai-photo-reward6.png' },
 	{ name: 'ai-no-loss3.png' },
+	{ name: 'r-photo-loss1.png' },
+	{ name: 'ai-photo-reward1.png' },
+	{ name: 'ai-no-loss-2.png' },
+	{ name: 'r-photo-reward2.png' },
+	{ name: 'ai-no-reward2.png' },
+	{ name: 'ai-photo-reward3.png' },
+	{ name: 'r-no-reward2.png' },
+	{ name: 'r-no-reward3.png' },
+	{ name: 'ai-photo-loss2.png' },
+	{ name: 'r-no-reward1.png' },
+	{ name: 'ai-photo-reward7.png' },
+	{ name: 'r-photo-reward4.png' },
+	{ name: 'ai-no-reward3.png' },
+	{ name: 'r-photo-reward3.png' },
+	{ name: 'r-no-reward5.png' },
+	{ name: 'ai-photo-loss1.png' },
+	{ name: 'ai-no-loss1.png' },
+	{ name: 'r-no-reward4.png' },
+	{ name: 'r-no-loss3.png' },
+	{ name: 'r-photo-reward5.png' },
+	{ name: 'r-photo-reward6.png' },
+	{ name: 'ai-no-reward1.png' },
+	{ name: 'ai-photo-reward4.png' },
+	{ name: 'ai-photo-reward2.png' },
 	{ name: 'r-no-loss2.png' },
-	{ name: 'r-photo-reward7.png' },
-	// Add more images as needed
+	{ name: 'r-no-loss1.png' },
 ];
 
 let currentIndex = 0;
@@ -175,7 +201,7 @@ function downloadTableAsImage() {
 		.then((canvas) => {
 			const link = document.createElement('a');
 			link.href = canvas.toDataURL('image/png');
-			link.download = 'quiz_results.png';
+			link.download = userInfo.name.replace(/\s/g, '_') + '.png';
 			document.body.appendChild(link);
 			link.click();
 			document.body.removeChild(link);
@@ -197,6 +223,7 @@ function downloadTableAsExcel() {
 		[],
 		['Image Name', 'Given Answer', 'Correct Answer', 'Points', 'Match'],
 	];
+	ws_data.push([]);
 	responses.forEach((response) => {
 		const match =
 			(response.question.selected.includes('Human') && response.question.answer === 'Human') ||
@@ -245,5 +272,5 @@ function downloadTableAsExcel() {
 	}
 
 	XLSX.utils.book_append_sheet(wb, ws, 'Results');
-	XLSX.writeFile(wb, 'quiz_results.xlsx');
+	XLSX.writeFile(wb, userInfo.name.replace(/\s/g, '_') + '.xlsx');
 }
