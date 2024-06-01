@@ -68,6 +68,12 @@ function startQuiz() {
 function loadImage() {
 	const imageElement = document.getElementById('quiz-image');
 	imageElement.src = 'images/' + images[currentIndex].name;
+	updateCounter();
+}
+
+function updateCounter() {
+	const counterElement = document.getElementById('counter-container');
+	counterElement.textContent = `${currentIndex + 1}/${images.length}`;
 }
 
 function determineCorrectAnswer(imageName) {
