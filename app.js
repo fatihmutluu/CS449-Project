@@ -7,7 +7,7 @@ let images = [
 	{ name: 'ai-no-loss3.png' },
 	{ name: 'r-photo-loss1.png' },
 	{ name: 'ai-photo-reward1.png' },
-	{ name: 'ai-no-loss-2.png' },
+	{ name: 'ai-no-loss2.png' },
 	{ name: 'r-photo-reward2.png' },
 	{ name: 'ai-no-reward2.png' },
 	{ name: 'ai-photo-reward3.png' },
