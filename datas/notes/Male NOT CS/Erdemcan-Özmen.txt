@@ -1,33 +1,32 @@
-Erdemcan
 1. specific instructions
-2.
-3.
-4.
-5.
-6.
-7.
-8.
-9.
-10.
-11.
-12.
-13.
-14.
-15.
-16.
-17.
-18.
-19.
-20.
-21.
-22.
-23.
-24.
-25.
-26.
-27.
-28.
-29.
-30.
-31.
-32
+2. professionalism
+3. privacy policies (footer)
+4. cheerful tone
+5. not sure
+6. specific instructions
+7. lacks personal touch
+8. structure and language are too perfect
+9. typical security alert
+10. typical marketing email
+11. aggressive tone
+12. friendly & informative language
+13. typical verification email
+14. typical news alert
+15. cartoonish image
+16. proffessional layout
+17. simple language
+18. structure seem too perfect
+19. too formal language
+20. robotic tone
+21. The mention of "unlimited words and an endless supply of AI"
+22. image is too perfect
+23. too structures layout
+24. use of emojis
+25. typical email
+26. casual and engaging language
+27. repetitive language
+28. heuristically.
+29. too perfect language
+30. too perfect structure
+31. straightforward format, no specifics
+32. language patterns
