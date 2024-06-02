@@ -1,0 +1,32 @@
+1. looks too professional
+2. looks too professional
+3. suspicious language
+4. not sure
+5. too perfect design
+6. not sure
+7. urgency ("do not delay")
+8. heuristically.
+9. seems official
+10. not sure
+11. specific content
+12. well-designed layout, consistent language
+13. typical email
+14. typical email
+15. image
+16. detailed, professional
+17. well-designed layout
+18. clear and informative content
+19. short -> not sure
+20. polished language
+21. AI because it talks about AI
+22. consistent structure
+23. typical email
+24. friendly approach
+25. too formal
+26. friendly approach
+27. detailed
+28. typical
+29. well-structured
+30. detailed info
+31. typical
+32. not sure
